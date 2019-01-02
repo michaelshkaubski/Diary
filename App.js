@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
-import { Form, Container, Header, Title, Content,  CardItem, Button, Right, Body, Icon, Text, ImageBackground } from 'native-base';
-import {StyleSheet, Alert, Image} from 'react-native'
+import {Form, Container, Header, Title, Content,  CardItem, Button, Right, Body, Icon, Text} from 'native-base';
+import {StyleSheet, Alert, Image, ImageBackground} from 'react-native'
 
 export default class AnatomyExample extends Component {
 
