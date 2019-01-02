@@ -1,5 +1,5 @@
- import React, { Component } from 'react';
-import { Container, Header, Title, Content,  CardItem, Button, Right, Body, Icon, Text } from 'native-base';
+import React, { Component } from 'react';
+import { Form, Container, Header, Title, Content,  CardItem, Button, Right, Body, Icon, Text, ImageBackground } from 'native-base';
 import {StyleSheet, Alert, Image} from 'react-native'
 
 export default class AnatomyExample extends Component {
@@ -30,10 +30,10 @@ export default class AnatomyExample extends Component {
   render() {
 
     return (
-      <Image source={{uri: 'https://images.pexels.com/photos/1420440/pexels-photo-1420440.jpeg?cs=srgb&dl=android-wallpaper-dawn-dusk-1420440.jpg&fm=jpg'}}>
+      <ImageBackground source={{uri: 'https://images.pexels.com/photos/1420440/pexels-photo-1420440.jpeg?cs=srgb&dl=android-wallpaper-dawn-dusk-1420440.jpg&fm=jpg'}}>
         <Header />
         <Button onPress={() => this.createNote} rounded style={styles.addButton}><Icon name="add"/></Button>
-      </Image>
+      </ImageBackground>
     );
   }
 }
