@@ -1,24 +1,52 @@
-import React from 'react';
-import { StyleSheet, Text, View } from 'react-native';
-<head>
-  <link rel="stylesheet" href="material.css"/>
-  <script src="material.js"></script>
-  <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons"/>
-</head>
+ import React, { Component } from 'react';
+import { Container, Header, Title, Content,  CardItem, Button, Right, Body, Icon, Text } from 'native-base';
+import {StyleSheet, Alert, Image} from 'react-native'
 
-export default class App extends React.Component {
+export default class AnatomyExample extends Component {
+
+  constructor(props) {
+    super(props)
+
+    this.state = {
+      title: '',
+      body: '',
+    }
+  }
+
+  createNote() {
+    setState ({
+      title: <Form>
+                <Item floatingLabel>
+                  <Label>Title...</Label>
+                  <Input />
+                </Item>
+              </Form>,
+      body:   <Form>
+                <Textarea rowSpan={5} bordered placeholder="Body..." />
+              </Form>
+    })
+  }
+
   render() {
+
     return (
-      <FABButton colored ripple><Icon name="add"/></FABButton>
+      <Container>
+        <Image source={{uri: 'https://images.pexels.com/photos/1420440/pexels-photo-1420440.jpeg?cs=srgb&dl=android-wallpaper-dawn-dusk-1420440.jpg&fm=jpg'}}/>
+        <Header />
+        <Button onPress={() => this.createNote} rounded style={styles.addButton}><Icon name="add"/></Button>
+
+      </Container>
     );
   }
 }
 
 const styles = StyleSheet.create({
-  container: {
-    flex: 1,
+
+  addButton: {
     backgroundColor: '#fff',
-    alignItems: 'center',
-    justifyContent: 'center',
+    color: '#260d01',
+    alignSelf: 'flex-end',
+
   },
-});
+
+})
