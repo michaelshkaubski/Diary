@@ -16,26 +16,24 @@ export default class AnatomyExample extends Component {
   createNote() {
     setState ({
       title: <Form>
-                <Item floatingLabel>
-                  <Label>Title...</Label>
-                  <Input />
-                </Item>
-              </Form>,
-      body:   <Form>
-                <Textarea rowSpan={5} bordered placeholder="Body..." />
-              </Form>
+              <Item floatingLabel>
+                <Label>Title...</Label>
+                <Input />
+              </Item>
+             </Form>,
+      body:  <Form>
+              <Textarea rowSpan={5} bordered placeholder="Body..." />
+             </Form>
     })
   }
 
   render() {
 
     return (
-      <Container>
-        <Image source={{uri: 'https://images.pexels.com/photos/1420440/pexels-photo-1420440.jpeg?cs=srgb&dl=android-wallpaper-dawn-dusk-1420440.jpg&fm=jpg'}}/>
+      <Image source={{uri: 'https://images.pexels.com/photos/1420440/pexels-photo-1420440.jpeg?cs=srgb&dl=android-wallpaper-dawn-dusk-1420440.jpg&fm=jpg'}}>
         <Header />
         <Button onPress={() => this.createNote} rounded style={styles.addButton}><Icon name="add"/></Button>
-
-      </Container>
+      </Image>
     );
   }
 }
