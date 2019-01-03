@@ -10,6 +10,7 @@ export default class AnatomyExample extends Component {
     this.state = {
       title: '',
       body: '',
+      notes: [],
     }
   }
 
@@ -23,24 +24,25 @@ export default class AnatomyExample extends Component {
              </Form>,
       body:  <Form>
               <Textarea rowSpan={5} bordered placeholder="Body..." />
-             </Form>
-    })
-    notes.push (
-      <Card>
-        <CardItem header>
-          <Text>
-            { this.state.title }
-          </Text>
-        </CardItem>
-        <CardItem>
-          <Body>
+             </Form>,
+      notes: this.state.notes.push (
+        <Card>
+          <CardItem header>
             <Text>
-              { this.state.body }
+              { this.state.title }
             </Text>
-          </Body>
-        </CardItem>
-      </Card>
-    )
+          </CardItem>
+          <CardItem>
+            <Body>
+              <Text>
+                { this.state.body }
+              </Text>
+            </Body>
+          </CardItem>
+        </Card>
+      )
+    })
+
   }
 
   render() {
