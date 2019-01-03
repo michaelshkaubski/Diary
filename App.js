@@ -53,7 +53,7 @@ export default class AnatomyExample extends Component {
       <ImageBackground source={{uri: 'https://images.pexels.com/photos/1420440/pexels-photo-1420440.jpeg?cs=srgb&dl=android-wallpaper-dawn-dusk-1420440.jpg'}}>
         <Header />
         <Button onPress={() => this.createNote} rounded style={styles.addButton}><Icon name="add"/></Button>
-        { notes }
+        { this.state.notes }
       </ImageBackground>
     );
   }
