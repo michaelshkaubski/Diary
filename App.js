@@ -29,8 +29,10 @@ export default class AnatomyExample extends Component {
 
   render() {
 
+    var notesList = []
+
     return (
-      <ImageBackground source={{uri: 'https://images.pexels.com/photos/1420440/pexels-photo-1420440.jpeg?cs=srgb&dl=android-wallpaper-dawn-dusk-1420440.jpg&fm=jpg'}}>
+      <ImageBackground source={'https://images.pexels.com/photos/1420440/pexels-photo-1420440.jpeg?cs=srgb&dl=android-wallpaper-dawn-dusk-1420440.jpg&fm=jpg'}>
         <Header />
         <Button onPress={() => this.createNote} rounded style={styles.addButton}><Icon name="add"/></Button>
       </ImageBackground>
@@ -44,7 +46,6 @@ const styles = StyleSheet.create({
     backgroundColor: '#fff',
     color: '#260d01',
     alignSelf: 'flex-end',
-
   },
 
 })
