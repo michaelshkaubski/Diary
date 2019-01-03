@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
-import { Form, Container, Header, Title, Content, Card, CardItem, Button, Right, Body, Text } from 'native-base';
+import { Form, Item,  Container, Header, Title, Content, Card, CardItem, Button, Right, Body, Text } from 'native-base';
 import { StyleSheet, Alert, Image, ImageBackground } from 'react-native'
-import { Icon } from 'react-native-vector-icons/FontAwesome'
+import Icon from 'react-native-vector-icons/Ionicons'
 
 export default class AnatomyExample extends Component {
 
@@ -16,7 +16,7 @@ export default class AnatomyExample extends Component {
   }
 
   createNote() {
-    setState ({
+    this.setState ({
       title: <Form>
               <Item floatingLabel>
                 <Label>Title...</Label>
