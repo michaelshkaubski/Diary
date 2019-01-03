@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
-import {Form, Container, Header, Title, Content,  CardItem, Button, Right, Body, Icon, Text} from 'native-base';
-import {StyleSheet, Alert, Image, ImageBackground} from 'react-native'
+import { Form, Container, Header, Title, Content, Card, CardItem, Button, Right, Body, Icon, Text } from 'native-base';
+import { StyleSheet, Alert, Image, ImageBackground } from 'react-native'
 
 export default class AnatomyExample extends Component {
 
@@ -25,16 +25,33 @@ export default class AnatomyExample extends Component {
               <Textarea rowSpan={5} bordered placeholder="Body..." />
              </Form>
     })
+    notes.push (
+      <Card>
+        <CardItem header>
+          <Text>
+            { this.state.title }
+          </Text>
+        </CardItem>
+        <CardItem>
+          <Body>
+            <Text>
+              { this.state.body }
+            </Text>
+          </Body>
+        </CardItem>
+      </Card>
+    )
   }
 
   render() {
 
-    var notesList = []
+    var notes = []
 
     return (
-      <ImageBackground source={'https://images.pexels.com/photos/1420440/pexels-photo-1420440.jpeg?cs=srgb&dl=android-wallpaper-dawn-dusk-1420440.jpg&fm=jpg'}>
+      <ImageBackground source={{uri: 'https://images.pexels.com/photos/1420440/pexels-photo-1420440.jpeg?cs=srgb&dl=android-wallpaper-dawn-dusk-1420440.jpg'}}>
         <Header />
         <Button onPress={() => this.createNote} rounded style={styles.addButton}><Icon name="add"/></Button>
+        { notes }
       </ImageBackground>
     );
   }
