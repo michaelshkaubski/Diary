@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
-import { Form, Item,  Container, Header, Title, Content, Card, CardItem, Button, Right, Body, Text } from 'native-base';
+import { Form, Item, Label, Input, Textarea, Container, Header, Title, Content, Card, CardItem, Button, Right, Body, Text } from 'native-base';
 import { StyleSheet, Alert, Image, ImageBackground } from 'react-native'
-import Icon from 'react-native-vector-icons/Ionicons'
+import Icon from 'react-native-vector-icons/FontAwesome'
 
 export default class AnatomyExample extends Component {
 
@@ -48,13 +48,11 @@ export default class AnatomyExample extends Component {
 
   render() {
 
-    var notes = []
-
     return (
       <ImageBackground source={{uri: 'https://images.pexels.com/photos/1420440/pexels-photo-1420440.jpeg?cs=srgb&dl=android-wallpaper-dawn-dusk-1420440.jpg'}} style={{width: '100%', height: '100%'}}>
         <Header />
-        <Button onPress={() => this.createNote()} rounded style={styles.addButton}><Icon name="plus"/></Button>
-        { this.state.notes }
+        <Icon.Button onPress={() => this.createNote()} rounded style={styles.addButton} name="plus"></Icon.Button>
+        <Text>{ this.state.notes }</Text>
       </ImageBackground>
     );
   }
