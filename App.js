@@ -16,6 +16,26 @@ export default class AnatomyExample extends Component {
   }
 
   createNote() {
+
+    let noteList = this.state.notes || []
+
+    noteList.push (
+      <Card>
+        <CardItem header>
+          <Text>
+            { this.state.title }
+          </Text>
+        </CardItem>
+        <CardItem>
+          <Body>
+            <Text>
+              { this.state.body }
+            </Text>
+          </Body>
+        </CardItem>
+      </Card>
+    )
+
     this.setState ({
       title: <Form>
               <Item floatingLabel>
@@ -26,22 +46,7 @@ export default class AnatomyExample extends Component {
       body:  <Form>
               <Textarea rowSpan={5} bordered placeholder="Body..." />
              </Form>,
-      notes: this.state.notes.push (
-        <Card>
-          <CardItem header>
-            <Text>
-              { this.state.title }
-            </Text>
-          </CardItem>
-          <CardItem>
-            <Body>
-              <Text>
-                { this.state.body }
-              </Text>
-            </Body>
-          </CardItem>
-        </Card>
-      )
+      notes: noteList
     })
 
   }
