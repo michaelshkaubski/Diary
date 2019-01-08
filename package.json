@@ -12,6 +12,9 @@
     "native-base": "^2.10.0",
     "react": "16.5.0",
     "react-native": "https://github.com/expo/react-native/archive/sdk-31.0.0.tar.gz",
+    "react-native-material-bottom-navigation": "^1.0.2",
+    "react-native-material-textfield": "^0.12.0",
+    "react-native-snackbar": "^0.5.3",
     "react-native-vector-icons": "^6.1.0"
   },
   "devDependencies": {
