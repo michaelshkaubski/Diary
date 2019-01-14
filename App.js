@@ -1,28 +1,33 @@
-import React, { Component } from 'react'
-import { View, Text, StatusBar } from 'react-native'
-import { Profile } from './Profile'
-import { SignUp } from './SignUp'
-import * as firebase from 'firebase'
-import { Ionicons } from '@expo/vector-icons'
-import BottomNavigation, { IconTab } from 'react-native-material-bottom-navigation'
+import React, { Component } from 'react';
+import { View, Text, StatusBar } from 'react-native';
+import { Profile } from './src/Profile';
+import { SignUp } from './src/SignUp';
+import { Posts } from './src/Posts';
+import * as firebase from 'firebase';
+import { Ionicons } from '@expo/vector-icons';
+import BottomNavigation, { IconTab } from 'react-native-material-bottom-navigation';
 
 export default class App extends React.Component {
   constructor(props) {
     super(props)
+
     this.state = {
       signUp: <SignUp />,
+      posts: <Posts />,
+      activeTab: 'feed',
     }
 
     var config = {
-      apiKey: "AIzaSyA8AE4HmcAtDP7WhLNIYJcTmHhvv6zwQ5M",
-      authDomain: "hinet-d1a28.firebaseapp.com",
-      databaseURL: "https://hinet-d1a28.firebaseio.com",
-      projectId: "hinet-d1a28",
-      storageBucket: "hinet-d1a28.appspot.com",
-      messagingSenderId: "676739768355"
+      apiKey: "AIzaSyAWmv1Hkh4oSauahZG9yCIhq470az2tWtQ",
+      authDomain: "hilite-54ff0.firebaseapp.com",
+      databaseURL: "https://hilite-54ff0.firebaseio.com",
+      projectId: "hilite-54ff0",
+      storageBucket: "hilite-54ff0.appspot.com",
+      messagingSenderId: "272103104265"
     };
 
     firebase.initializeApp(config);
+
   }
 
   tabs = [
@@ -47,17 +52,25 @@ export default class App extends React.Component {
   ]
 
   componentDidMount() {
-       StatusBar.setHidden(true);
+    StatusBar.setHidden(true);
   }
 
   componentWillMount() {
     firebase.auth().onAuthStateChanged(function(user) {
-      if (user) {
+      if (user && tab.isActive === true && tab.key == 'feed') {
         Alert.alert("Congrats! You signed up!")
+        return (
+          this.state.posts
+        )
       } else {
-        this.state.signUp.style.display = 'block';
+        this.state.signUp.style.display = 'block'
+        this.state.posts.style.display = 'none'
       }
     });
+  }
+
+  handleTabPress = (newTab, oldTab) => {
+    this.setState({ activeTab: newTab.key })
   }
 
   render() {
@@ -65,11 +78,17 @@ export default class App extends React.Component {
       <View style={{ flex: 1 }}>
         <View style={{ flex: 1 }}>
           { this.state.signUp }
+          { this.state.posts }
         </View>
-        <BottomNavigation renderTab={this.renderTab} tabs={this.tabs}/>
+        <BottomNavigation
+          renderTab={this.renderTab}
+          tabs={this.tabs}
+          onTabPress={this.handleTabPress}
+        />
       </View>
     )
   }
+
   renderTab = ({ tab, isActive }) => {
     return (
       <IconTab
@@ -79,6 +98,7 @@ export default class App extends React.Component {
       />
     )
   }
+
   renderIcon = iconName => ({ isActive }) => {
     return <Ionicons size={24} color="#eb0000" name={iconName} />
   }

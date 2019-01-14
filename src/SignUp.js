@@ -1,43 +1,37 @@
-import React, { Component } from 'react'
-import { View, StyleSheet, Button, Alert } from 'react-native'
-import * as firebase from 'firebase'
-import { TextField } from 'react-native-material-textfield'
+import React, { Component } from 'react';
+import { View, StyleSheet, Button, Alert } from 'react-native';
+import * as firebase from 'firebase';
+import { TextField } from 'react-native-material-textfield';
 
 export default class SignUp extends React.Component {
 
   constructor(props) {
     super(props)
 
+    this.state = {
+      email: '',
+      password: '',
+    }
+
     var config = {
-      apiKey: "AIzaSyA8AE4HmcAtDP7WhLNIYJcTmHhvv6zwQ5M",
-      authDomain: "hinet-d1a28.firebaseapp.com",
-      databaseURL: "https://hinet-d1a28.firebaseio.com",
-      projectId: "hinet-d1a28",
-      storageBucket: "hinet-d1a28.appspot.com",
-      messagingSenderId: "676739768355"
+      apiKey: "AIzaSyAWmv1Hkh4oSauahZG9yCIhq470az2tWtQ",
+      authDomain: "hilite-54ff0.firebaseapp.com",
+      databaseURL: "https://hilite-54ff0.firebaseio.com",
+      projectId: "hilite-54ff0",
+      storageBucket: "hilite-54ff0.appspot.com",
+      messagingSenderId: "272103104265"
     };
-
+    
     firebase.initializeApp(config);
-
-    var token = result.credential.accessToken;
-    var user = result.user;
-    var provider = new firebase.auth.GoogleAuthProvider();
 
   }
 
   userAuth() {
-    firebase.auth().signInWithPopup(provider).then(function(result) {
-      var token = result.credential.accessToken;
-      var user = result.user;
-    }).catch(function(error) {
-
+    firebase.auth().createUserWithEmailAndPassword(this.state.email, this.state.password).catch(function(error) {
         var errorCode = error.code;
         var errorMessage = error.message;
-        var email = error.email;
-        var credential = error.credential;
-
         Alert.alert("Something went wrong, error code: " + errorCode)
-      });
+    });
   }
 
   render() {
@@ -67,12 +61,10 @@ export default class SignUp extends React.Component {
 const styles = StyleSheet.create({
   card: {
     backgroundColor: '#fff',
-    fontColor: '#000',
     borderRadius:10,
   },
   signUp: {
     width: 300,
     height: 75,
-    fontColor: '#fff',
   }
 })
