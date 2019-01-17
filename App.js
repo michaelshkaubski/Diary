@@ -1,7 +1,9 @@
 import React, { Component } from 'react';
 import { View, Text, StatusBar } from 'react-native';
-import Posts  from './src/Posts';
 import SignIn  from './src/SignIn';
+import Posts  from './src/Posts';
+import Search  from './src/Search';
+import Feed  from './src/Feed';
 import * as firebase from 'firebase';
 import { Ionicons } from '@expo/vector-icons';
 import BottomNavigation, { IconTab } from 'react-native-material-bottom-navigation';
@@ -12,7 +14,7 @@ export default class App extends React.Component {
 
     this.state = {
       activeTab: 'feed',
-      logged: 0,
+      content: null,
     }
 
     var config = {
@@ -33,33 +35,36 @@ export default class App extends React.Component {
       key: 'feed',
       icon: 'md-bookmarks',
       barColor: '#fff',
-      pressColor: 'rgba(0, 0, 0, 0.07)'
+      pressColor: 'rgba(0, 0, 0, 0.07)',
+      content: <Feed />
     },
     {
       key: 'search',
       icon: 'md-search',
       barColor: '#fff',
-      pressColor: 'rgba(0, 0, 0, 0.07)'
+      pressColor: 'rgba(0, 0, 0, 0.07)',
+      content: <Search />
     },
     {
       key: 'profile',
       icon: 'md-person',
       barColor: '#fff',
-      pressColor: 'rgba(0, 0, 0, 0.07)'
+      pressColor: 'rgba(0, 0, 0, 0.07)',
+      content: <SignIn />
     }
   ]
 
   handleTabPress = (newTab, oldTab) => {
-    this.setState({ activeTab: newTab.key })
     this.renderIcon(newTab.icon, '#00c4aa')
-    this.renderIcon(oldTab.icon, 'white')
+    this.renderIcon(oldTab.icon, '#d1d1d1')
   }
 
   render() {
     return (
       <View style={{ flex: 1 }}>
-        <View style={{ flex: 1 }}><SignIn /></View>
-        <View style={{ flex: 1 }}><Posts /></View>
+        <View style={{ flex: 1 }}>
+          { this.state.content }
+        </View>
         <BottomNavigation
           renderTab={this.renderTab}
           tabs={this.tabs}
@@ -70,6 +75,9 @@ export default class App extends React.Component {
   }
 
   renderTab = ({ tab, isActive }) => {
+    if (isActive) {
+      this.setState({content: tab.content})
+    }
     return (
       <IconTab
         key={tab.key}

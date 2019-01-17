@@ -8,6 +8,7 @@
   },
   "dependencies": {
     "expo": "^31.0.2",
+    "expo-google-sign-in": "^2.0.0",
     "firebase": "^5.7.2",
     "native-base": "^2.10.0",
     "react": "16.5.0",

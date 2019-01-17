@@ -13,7 +13,7 @@ export default class SignIn extends Component {
     return (
       <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center' }}>
         {!this.state.userInfo ? (
-          <Button title="Sign in with Facebook" color="#020075"  onPress={this._handlePressAsync} />
+          <Button title="Sign in with Facebook" color="#004299" onPress={this._handlePressAsync} />
         ) : (
           this._renderUserInfo()
         )}
