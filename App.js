@@ -1,8 +1,7 @@
 import React, { Component } from 'react';
 import { View, Text, StatusBar } from 'react-native';
-import { Profile } from './src/Profile';
-import { SignUp } from './src/SignUp';
-import { Posts } from './src/Posts';
+import Posts  from './src/Posts';
+import SignIn  from './src/SignIn';
 import * as firebase from 'firebase';
 import { Ionicons } from '@expo/vector-icons';
 import BottomNavigation, { IconTab } from 'react-native-material-bottom-navigation';
@@ -12,9 +11,8 @@ export default class App extends React.Component {
     super(props)
 
     this.state = {
-      signUp: <SignUp />,
-      posts: <Posts />,
       activeTab: 'feed',
+      logged: 0,
     }
 
     var config = {
@@ -34,52 +32,34 @@ export default class App extends React.Component {
     {
       key: 'feed',
       icon: 'md-bookmarks',
-      barColor: '#000',
-      pressColor: 'rgba(247, 247, 247, 0.45)'
+      barColor: '#fff',
+      pressColor: 'rgba(0, 0, 0, 0.07)'
     },
     {
       key: 'search',
       icon: 'md-search',
-      barColor: '#000',
-      pressColor: 'rgba(247, 247, 247, 0.45)'
+      barColor: '#fff',
+      pressColor: 'rgba(0, 0, 0, 0.07)'
     },
     {
       key: 'profile',
       icon: 'md-person',
-      barColor: '#000',
-      pressColor: 'rgba(247, 247, 247, 0.45)'
+      barColor: '#fff',
+      pressColor: 'rgba(0, 0, 0, 0.07)'
     }
   ]
 
-  componentDidMount() {
-    StatusBar.setHidden(true);
-  }
-
-  componentWillMount() {
-    firebase.auth().onAuthStateChanged(function(user) {
-      if (user && tab.isActive === true && tab.key == 'feed') {
-        Alert.alert("Congrats! You signed up!")
-        return (
-          this.state.posts
-        )
-      } else {
-        this.state.signUp.style.display = 'block'
-        this.state.posts.style.display = 'none'
-      }
-    });
-  }
-
   handleTabPress = (newTab, oldTab) => {
     this.setState({ activeTab: newTab.key })
+    this.renderIcon(newTab.icon, '#00c4aa')
+    this.renderIcon(oldTab.icon, 'white')
   }
 
   render() {
     return (
       <View style={{ flex: 1 }}>
-        <View style={{ flex: 1 }}>
-          { this.state.signUp }
-          { this.state.posts }
-        </View>
+        <View style={{ flex: 1 }}><SignIn /></View>
+        <View style={{ flex: 1 }}><Posts /></View>
         <BottomNavigation
           renderTab={this.renderTab}
           tabs={this.tabs}
@@ -94,12 +74,15 @@ export default class App extends React.Component {
       <IconTab
         key={tab.key}
         isActive={isActive}
-        renderIcon={this.renderIcon(tab.icon)}
+        renderIcon={this.renderIcon(tab.icon, 'white')}
       />
     )
   }
 
   renderIcon = iconName => ({ isActive }) => {
-    return <Ionicons size={24} color="#eb0000" name={iconName} />
+    if (isActive) {
+      color = '#00c4aa';
+    }
+    return <Ionicons size={24} color={color} name={iconName} />
   }
 }
