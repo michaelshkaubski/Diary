@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { View, Text, StatusBar } from 'react-native';
-import SignIn  from './src/SignIn';
+import SignIn from './src/SignIn'
 import Posts  from './src/Posts';
 import Search  from './src/Search';
 import Feed  from './src/Feed';
@@ -50,13 +50,16 @@ export default class App extends React.Component {
       icon: 'md-person',
       barColor: '#fff',
       pressColor: 'rgba(0, 0, 0, 0.07)',
-      content: <SignIn />
+      content: <Posts />
     }
   ]
 
   handleTabPress = (newTab, oldTab) => {
-    this.renderIcon(newTab.icon, '#00c4aa')
-    this.renderIcon(oldTab.icon, '#d1d1d1')
+    this.renderIcon(newTab.icon, '#d3b2e8')
+  }
+
+  componentWillMount() {
+    StatusBar.setHidden() == true
   }
 
   render() {
@@ -82,14 +85,14 @@ export default class App extends React.Component {
       <IconTab
         key={tab.key}
         isActive={isActive}
-        renderIcon={this.renderIcon(tab.icon, 'white')}
+        renderIcon={this.renderIcon(tab.icon, '#d3b2e8')}
       />
     )
   }
 
-  renderIcon = iconName => ({ isActive }) => {
+  renderIcon = (iconName, color) => ({ isActive }) => {
     if (isActive) {
-      color = '#00c4aa';
+      color = '#d3b2e8';
     }
     return <Ionicons size={24} color={color} name={iconName} />
   }

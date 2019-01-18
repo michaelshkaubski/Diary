@@ -1,62 +1,52 @@
 import React, { Component } from 'react';
-import { Image, Button, StyleSheet, Text, View } from 'react-native';
+import { Image, Button, StyleSheet, Text, View, Alert } from 'react-native';
 import { AuthSession } from 'expo';
-
-const FB_APP_ID = '347069559226456';
+import * as firebase from 'firebase';
 
 export default class SignIn extends Component {
-  state = {
-    userInfo: null,
-  };
+  constructor(props) {
+    super(props)
 
-  render() {
-    return (
-      <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center' }}>
-        {!this.state.userInfo ? (
-          <Button title="Sign in with Facebook" color="#004299" onPress={this._handlePressAsync} />
-        ) : (
-          this._renderUserInfo()
-        )}
-      </View>
-    );
+    var config = {
+      apiKey: "AIzaSyAWmv1Hkh4oSauahZG9yCIhq470az2tWtQ",
+      authDomain: "hilite-54ff0.firebaseapp.com",
+      databaseURL: "https://hilite-54ff0.firebaseio.com",
+      projectId: "hilite-54ff0",
+      storageBucket: "hilite-54ff0.appspot.com",
+      messagingSenderId: "272103104265"
+    };
+
+    var provider = new firebase.auth.FacebookAuthProvider();
   }
 
-  _renderUserInfo = () => {
+  authWithFacebook() {
+    firebase.auth().signInWithRedirect(provider).then(function(result) {
+      var token = result.credential.accessToken;
+      var user = result.user;
+      console.log(user)
+    }).catch(function(error){
+      var errorCode = error.code;
+      var credential = error.credential;
+      if (errorCode) {
+        Alert.alert("Uh oh, something went wrong, error code: " + errorCode)
+      }
+      if (credential) {
+        Alert.alert("Uh oh, bad credentials: " + credential)
+      }
+    })
+  }
+
+  render() {
+
     return (
-      <View style={{ alignItems: 'center' }}>
-        <Image
-          source={{ uri: this.state.userInfo.picture.data.url }}
-          style={{ width: 100, height: 100, borderRadius: 50 }}
+      <View style={{ flex: 1 }}>
+        <Button
+          onPress={ () => authWithFacebook() }
+          color="00259e"
+          title="Facebook"
         />
-        <Text style={{ fontSize: 20 }}>{this.state.userInfo.name}</Text>
+        <Posts style={{marginTop: 50}}/>
       </View>
-    );
-  };
-
-  _handlePressAsync = async () => {
-    let redirectUrl = AuthSession.getRedirectUrl();
-
-    console.log({
-      redirectUrl
-    });
-
-    let result = await AuthSession.startAsync({
-      authUrl:
-        `https://www.facebook.com/v2.8/dialog/oauth?response_type=token` +
-        `&client_id=${FB_APP_ID}` +
-        `&redirect_uri=${encodeURIComponent(redirectUrl)}`,
-    });
-
-    if (result.type !== 'success') {
-      alert('Uh oh, something went wrong');
-      return;
-    }
-
-    let accessToken = result.params.access_token;
-    let userInfoResponse = await fetch(
-      `https://graph.facebook.com/me?access_token=${accessToken}&fields=id,name,picture.type(large)`
-    );
-    const userInfo = await userInfoResponse.json();
-    this.setState({ userInfo });
-  };
+    )
+  }
 }
