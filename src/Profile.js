@@ -7,7 +7,7 @@ export default class Profile extends React.Component {
   render() {
     return (
       <View>
-        <Text>This is your profile</Text>
+        <Text>{ this.props.email }</Text>
       </View>
     )
   }

@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import { Image, Button, StyleSheet, Text, View, Alert } from 'react-native';
 import { AuthSession } from 'expo';
+import Profile from './SignUp';
 import { TextField } from 'react-native-material-textfield'
 import * as firebase from 'firebase';
 
@@ -40,6 +41,7 @@ export default class SignIn extends Component {
   render() {
     return (
       <View style={{ flex: 1 }}>
+        <Profile email = { this.state.email }/>
         <Text style={{textAlign: 'center', fontSize:  25, color: '#000'}}>Sign in</Text>
         <TextField
           label='Email'
