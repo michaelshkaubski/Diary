@@ -36,7 +36,6 @@ export default class Posts extends React.Component {
   }
 
   createPost() {
-
     let postList = this.state.posts || []
 
     postList.push (

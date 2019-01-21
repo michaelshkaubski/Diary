@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { View, Text, StatusBar } from 'react-native';
-import SignIn from './src/SignIn'
+import SignUp from './src/SignUp'
 import Posts  from './src/Posts';
 import Search  from './src/Search';
 import Feed  from './src/Feed';
@@ -43,14 +43,14 @@ export default class App extends React.Component {
       icon: 'md-search',
       barColor: '#fff',
       pressColor: 'rgba(0, 0, 0, 0.07)',
-      content: <Search />
+      content: <Posts />
     },
     {
       key: 'profile',
       icon: 'md-person',
       barColor: '#fff',
       pressColor: 'rgba(0, 0, 0, 0.07)',
-      content: <Posts />
+      content: <SignUp />
     }
   ]
 
@@ -61,7 +61,7 @@ export default class App extends React.Component {
   componentWillMount() {
     StatusBar.setHidden() == true
   }
-
+ 
   render() {
     return (
       <View style={{ flex: 1 }}>
