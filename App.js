@@ -4,6 +4,7 @@ import SignUp from './src/SignUp'
 import Posts  from './src/Posts';
 import Search  from './src/Search';
 import Feed  from './src/Feed';
+import Profile  from './src/Profile';
 import * as firebase from 'firebase';
 import { Ionicons } from '@expo/vector-icons';
 import BottomNavigation, { IconTab } from 'react-native-material-bottom-navigation';
@@ -36,7 +37,7 @@ export default class App extends React.Component {
       icon: 'md-bookmarks',
       barColor: '#fff',
       pressColor: 'rgba(0, 0, 0, 0.07)',
-      content: <Feed />
+      content: <Profile />
     },
     {
       key: 'search',
@@ -61,7 +62,7 @@ export default class App extends React.Component {
   componentWillMount() {
     StatusBar.setHidden() == true
   }
- 
+
   render() {
     return (
       <View style={{ flex: 1 }}>
@@ -78,9 +79,6 @@ export default class App extends React.Component {
   }
 
   renderTab = ({ tab, isActive }) => {
-    if (isActive) {
-      this.setState({content: tab.content})
-    }
     return (
       <IconTab
         key={tab.key}
