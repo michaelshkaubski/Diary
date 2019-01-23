@@ -56,7 +56,7 @@ export default class App extends React.Component {
   ]
 
   handleTabPress = (newTab, oldTab) => {
-    this.renderIcon(newTab.icon, '#d3b2e8')
+    this.renderIcon(newTab.icon, '#660899')
   }
 
   componentWillMount() {
@@ -78,20 +78,33 @@ export default class App extends React.Component {
     )
   }
 
-  renderTab = ({ tab, isActive }) => {
+  renderTab = ({tab, isActive}) => {
+    let color = '#ecebed';
+
+    switch (tab.key) {
+      case 'feed' : {
+        color = '#660899'
+        break
+      }
+      case 'search' : {
+        color = '#660899'
+        break
+      }
+      case 'profile' : {
+        color = '#660899'
+        break
+      }
+    }
     return (
       <IconTab
         key={tab.key}
         isActive={isActive}
-        renderIcon={this.renderIcon(tab.icon, '#d3b2e8')}
+        renderIcon={this.renderIcon(tab.icon, color)}
       />
     )
   }
 
   renderIcon = (iconName, color) => ({ isActive }) => {
-    if (isActive) {
-      color = '#d3b2e8';
-    }
     return <Ionicons size={24} color={color} name={iconName} />
   }
 }
