@@ -59,13 +59,12 @@ export default class App extends React.Component {
     this.renderIcon(newTab.icon, '#660899')
   }
 
-  componentWillMount() {
-    StatusBar.setHidden() == true
-  }
-
   render() {
     return (
       <View style={{ flex: 1 }}>
+        <View style={{ flex: 1, backgroundColor: '#851dab', color: '#fff' }}>
+          { tab.key }
+        </View>
         <View style={{ flex: 1 }}>
           { this.state.content }
         </View>
@@ -83,15 +82,15 @@ export default class App extends React.Component {
 
     switch (tab.key) {
       case 'feed' : {
-        color = '#660899'
+        color = '#851dab'
         break
       }
       case 'search' : {
-        color = '#660899'
+        color = '#851dab'
         break
       }
       case 'profile' : {
-        color = '#660899'
+        color = '#851dab'
         break
       }
     }
