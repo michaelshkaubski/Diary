@@ -63,7 +63,7 @@ export default class App extends React.Component {
     return (
       <View style={{ flex: 1 }}>
         <View style={{ flex: 1, backgroundColor: '#851dab', color: '#fff', height: 50 }}>
-          { tab.key }
+          <Text>Pigeon</Text>
         </View>
         <View style={{ flex: 1 }}>
           { this.state.content }
