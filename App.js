@@ -57,10 +57,7 @@ export default class App extends React.Component {
 
   render() {
     return (
-      <View style={{ flex: 1 }}>
-        <View style={{ flex: 1, backgroundColor: '#242424' }}>
-
-        </View>
+      <View style={{ flex: 1, backgroundColor: '#171717'  }}>
         <BottomNavigation
           renderTab={this.renderTab}
           tabs={this.tabs}
