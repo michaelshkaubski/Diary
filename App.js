@@ -62,10 +62,7 @@ export default class App extends React.Component {
   render() {
     return (
       <View style={{ flex: 1 }}>
-        <View style={{ flex: 1, backgroundColor: '#851dab', color: '#fff', height: 50 }}>
-          <Text>Pigeon</Text>
-        </View>
-        <View style={{ flex: 1 }}>
+        <View style={{ flex: 1, backgroundColor: '#303030' }}>
           { this.state.content }
         </View>
         <BottomNavigation

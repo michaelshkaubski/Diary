@@ -17,7 +17,7 @@ export default class Profile extends React.Component {
         <Text>{ this.props.email }</Text>
         { this.state.image && <Image source={{ uri: image }} style={{ width: 200, height: 200 }} /> }
         <Button
-          title="Choose avatar"
+          title="CHOOSE AVATAR"
           onPress={this._pickImage}
         />
       </View>

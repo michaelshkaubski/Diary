@@ -44,19 +44,19 @@ export default class SignIn extends Component {
         <Profile email = { this.state.email }/>
         <Text style={{textAlign: 'center', fontSize:  25, color: '#000'}}>Sign in</Text>
         <TextField
-          label='Email'
+          label='EMAIL'
           value={ this.state.email }
           onChangeText={ (email) => this.setState({ email }) }
         />
         <TextField
-          label='Password'
+          label='PASSWORD'
           value={ this.state.password }
           onChangeText={ (password) => this.setState({ password }) }
         />
         <Button
           onPress={ () => authWithEmailAndPassword() }
           color="#d2b3e8"
-          title="Sign Up"
+          title="SIGN UP"
         />
         <Posts style={{marginTop: 50}}/>
       </View>

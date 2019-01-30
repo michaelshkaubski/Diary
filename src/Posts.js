@@ -8,7 +8,7 @@ export default class Posts extends React.Component {
 
   constructor(props) {
     super(props)
-  
+
     this.state = {
       title: '',
       body: '',
@@ -76,18 +76,18 @@ export default class Posts extends React.Component {
     return (
       <View style = { styles.postCard }>
         <TextField
-          label='Title'
+          label='TITLE'
           value={ this.state.title }
           onChangeText={ (title) => this.setState({ title }) }
         />
         <TextField
-          label='Body'
+          label='BODY'
           value={ this.state.body }
           onChangeText={ (body) => this.setState({ body }) }
         />
         <Button
           onPress={ () => this.createPost() }
-          title="Share"
+          title="SHARE"
           color="#d3b2e8"
           style={{width: 100, height: 30, color: '#fff'}}
         />
