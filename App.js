@@ -55,20 +55,15 @@ export default class App extends React.Component {
     }
   ]
 
-  handleTabPress = (newTab, oldTab) => {
-    this.renderIcon(newTab.icon, '#660899')
-  }
-
   render() {
     return (
       <View style={{ flex: 1 }}>
-        <View style={{ flex: 1, backgroundColor: '#303030' }}>
-          { this.state.content }
+        <View style={{ flex: 1, backgroundColor: '#242424' }}>
+
         </View>
         <BottomNavigation
           renderTab={this.renderTab}
           tabs={this.tabs}
-          onTabPress={this.handleTabPress}
         />
       </View>
     )
@@ -76,18 +71,21 @@ export default class App extends React.Component {
 
   renderTab = ({tab, isActive}) => {
     let color = '#ecebed';
-
+    console.log(tab.key)
     switch (tab.key) {
       case 'feed' : {
-        color = '#851dab'
+        color = '#242424'
+        console.log(tab.key)
         break
       }
       case 'search' : {
-        color = '#851dab'
+        color = '#242424'
+        console.log(tab.key)
         break
       }
       case 'profile' : {
-        color = '#851dab'
+        color = '#242424'
+        console.log(tab.key)
         break
       }
     }
