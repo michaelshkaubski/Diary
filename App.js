@@ -59,7 +59,7 @@ export default class App extends React.Component {
     return (
       <View style={{ flex: 1, backgroundColor: '#171717'  }}>
         <View style={{flex: 1}}>
-          
+
         </View>
         <BottomNavigation
           renderTab={this.renderTab}
@@ -71,24 +71,12 @@ export default class App extends React.Component {
 
   renderTab = ({tab, isActive}) => {
     let color = '#ecebed';
-    console.log(tab.key)
-    switch (tab.key) {
-      case 'feed' : {
-        color = '#242424'
-        console.log(tab.key)
-        break
-      }
-      case 'search' : {
-        color = '#242424'
-        console.log(tab.key)
-        break
-      }
-      case 'profile' : {
-        color = '#242424'
-        console.log(tab.key)
-        break
-      }
+    let aciveColor = "#171717"
+
+    if (isActive) {
+      color = activeColor
     }
+
     return (
       <IconTab
         key={tab.key}
