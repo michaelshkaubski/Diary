@@ -70,8 +70,8 @@ export default class App extends React.Component {
   }
 
   renderTab = ({tab, isActive}) => {
-    let color = '#ecebed';
-    let aciveColor = "#171717"
+    let color = '#d9d9d9';
+    let activeColor = "#171717"
 
     if (isActive) {
       color = activeColor
@@ -87,6 +87,6 @@ export default class App extends React.Component {
   }
 
   renderIcon = (iconName, color) => ({ isActive }) => {
-    return <Ionicons size={24} color={color} name={iconName} />
+    return <Ionicons size={20} color={color} name={iconName} />
   }
 }
