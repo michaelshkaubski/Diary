@@ -58,7 +58,6 @@ export default class SignIn extends Component {
           color="#d2b3e8"
           title="SIGN UP"
         />
-        <Posts style={{marginTop: 50}}/>
       </View>
     )
   }

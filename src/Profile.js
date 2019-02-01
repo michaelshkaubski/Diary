@@ -1,6 +1,7 @@
 import React from 'react';
-import { StyleSheet, View, Text } from 'react-native';
-import { ImagePicker } from 'expo'
+import { StyleSheet, View, Text, Button, Image } from 'react-native';
+import SignUp from './SignUp';
+import { ImagePicker } from 'expo';
 
 export default class Profile extends React.Component {
   constructor(props) {
@@ -9,6 +10,7 @@ export default class Profile extends React.Component {
     this.state = {
       image: null,
     }
+
   }
 
   render() {

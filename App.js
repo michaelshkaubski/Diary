@@ -1,12 +1,12 @@
 import React, { Component } from 'react';
 import { View, Text, StatusBar } from 'react-native';
-import SignUp from './src/SignUp'
+import SignUp from './src/SignUp';
 import Posts  from './src/Posts';
 import Search  from './src/Search';
 import Feed  from './src/Feed';
 import Profile  from './src/Profile';
 import * as firebase from 'firebase';
-import { Ionicons } from '@expo/vector-icons';
+import { Ionicons, MaterialIcons } from '@expo/vector-icons';
 import BottomNavigation, { IconTab } from 'react-native-material-bottom-navigation';
 
 export default class App extends React.Component {
@@ -34,7 +34,7 @@ export default class App extends React.Component {
   tabs = [
     {
       key: 'feed',
-      icon: 'md-bookmarks',
+      icon: 'md-book',
       barColor: '#fff',
       pressColor: 'rgba(0, 0, 0, 0.07)',
       content: <Profile />
@@ -48,30 +48,42 @@ export default class App extends React.Component {
     },
     {
       key: 'profile',
-      icon: 'md-person',
+      icon: 'person-outline',
       barColor: '#fff',
       pressColor: 'rgba(0, 0, 0, 0.07)',
       content: <SignUp />
     }
   ]
 
+  componentWillMount() {
+    this.setState({
+      content: this.tabs[0].content
+    })
+  }
+
   render() {
     return (
       <View style={{ flex: 1, backgroundColor: '#171717'  }}>
         <View style={{flex: 1}}>
-
+          { this.state.content }
         </View>
         <BottomNavigation
           renderTab={this.renderTab}
           tabs={this.tabs}
+          onTabPress={(newTab, oldTab) => {
+            this.setState({
+              content: newTab.content,
+            })
+          }}
         />
       </View>
     )
   }
 
   renderTab = ({tab, isActive}) => {
-    let color = '#d9d9d9';
+    let color = '#969696';
     let activeColor = "#171717"
+    let tabName = tab.key
 
     if (isActive) {
       color = activeColor
@@ -81,12 +93,16 @@ export default class App extends React.Component {
       <IconTab
         key={tab.key}
         isActive={isActive}
-        renderIcon={this.renderIcon(tab.icon, color)}
+        renderIcon={this.renderIcon(tab.icon, color, tabName)}
       />
     )
   }
 
-  renderIcon = (iconName, color) => ({ isActive }) => {
-    return <Ionicons size={20} color={color} name={iconName} />
+  renderIcon = (iconName, color, tabName) => ({ isActive }) => {
+    if (tabName === 'profile')  {
+      return <MaterialIcons size={25} color={color} name={iconName} />
+    } else {
+      return <Ionicons size={25} color={color} name={iconName} />
+    }
   }
 }
