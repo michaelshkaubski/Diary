@@ -21,6 +21,7 @@ export default class Profile extends React.Component {
         <Button
           title="CHOOSE AVATAR"
           onPress={this._pickImage}
+          color="#d3b2e8"
         />
       </View>
     )
