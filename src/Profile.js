@@ -1,6 +1,6 @@
 import React from 'react';
 import { StyleSheet, View, Text, Button, Image } from 'react-native';
-import SignUp from './SignUp';
+import Register from './SignUp';
 import { ImagePicker } from 'expo';
 
 export default class Profile extends React.Component {
@@ -10,8 +10,9 @@ export default class Profile extends React.Component {
     this.state = {
       image: null,
     }
-
   }
+
+
 
   render() {
     return (
@@ -22,6 +23,7 @@ export default class Profile extends React.Component {
           title="CHOOSE AVATAR"
           onPress={this._pickImage}
           color="#d3b2e8"
+          style={{width: 50}}
         />
       </View>
     )

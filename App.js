@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { View, Text, StatusBar } from 'react-native';
-import SignUp from './src/SignUp';
+import Register from './src/Register';
 import Posts  from './src/Posts';
 import Search  from './src/Search';
 import Feed  from './src/Feed';
@@ -51,7 +51,7 @@ export default class App extends React.Component {
       icon: 'person-outline',
       barColor: '#fff',
       pressColor: 'rgba(0, 0, 0, 0.07)',
-      content: <SignUp />
+      content: <Register />
     }
   ]
 
