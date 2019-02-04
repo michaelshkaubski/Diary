@@ -24,7 +24,7 @@ export default class Register extends React.Component {
 
   }
 
-  signUpUser(email, password) {
+  signUpUser = (email, password) => {
     try {
       if (this.state.password < 6) {
         Alert.alert("Enter at least 6 characters")
@@ -38,7 +38,7 @@ export default class Register extends React.Component {
     }
   }
 
-  loginUser(email, password) {
+  loginUser = (email, password) => {
     try {
       firebase.auth().singInWithEmailAndPassword(email, password).then(function(user){
         console.log(user)
@@ -56,34 +56,38 @@ export default class Register extends React.Component {
       <View style={{ flex: 1, backgroundColor: '#fff'}}>
         <Container>
           <Form>
-            <Item floatinglabel>
-              <Label>EMAIL</Label>
+            <Item floatingLabel>
+              <Label>Email</Label>
               <Input
                 value={ this.state.email }
                 onChangeText={ (email) => this.setState({ email }) }
               />
             </Item>
-            <Item floatinglabel>
-              <Label>PASSWORD</Label>
+            <Item floatingLabel last>
+              <Label>Password</Label>
               <Input
                 value={ this.state.password }
                 onChangeText={ (password) => this.setState({ password }) }
               />
             </Item>
             <Button
+              full
               rounded
-              onPress={ () => signUpUser(email,password) }
+              onPress={ () => this.signUpUser(email, password) }
               color="#d2b3e8"
-              title="Sign Up"
-              style={{width: 30, marginTop: 10}}
-            />
+              style={{marginTop: 10, width: 100, color: '#fff'}}
+            >
+              <Text>Sign Up</Text>
+            </Button>
             <Button
+              full
               rounded
-              onPress={ () => loginUser(email,password) }
+              onPress={ () => this.loginUser(email, password) }
               color="#d2b3e8"
-              title="Login"
-              style={{width: 30, marginTop: 10}}
-            />
+              style={{marginTop: 10, width: 100}}
+            >
+              <Text>Login</Text>
+            </Button>
           </Form>
         </Container>
       </View>
