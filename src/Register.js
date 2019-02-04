@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
-import { Image, Button, StyleSheet, Text, View, Alert } from 'react-native';
+import { Image, StyleSheet, Text, View, Alert } from 'react-native';
 import { AuthSession } from 'expo';
-import { TextField } from 'react-native-material-textfield'
+import { Container, Form, Item, Input, Label, Button } from 'native-base';
 import * as firebase from 'firebase';
 
 export default class Register extends React.Component {
@@ -24,7 +24,7 @@ export default class Register extends React.Component {
 
   }
 
-  signUpUser = (email, password) => {
+  signUpUser(email, password) {
     try {
       if (this.state.password < 6) {
         Alert.alert("Enter at least 6 characters")
@@ -38,7 +38,7 @@ export default class Register extends React.Component {
     }
   }
 
-  loginUser = (email, password) => {
+  loginUser(email, password) {
     try {
       firebase.auth().singInWithEmailAndPassword(email, password).then(function(user){
         console.log(user)
@@ -53,32 +53,39 @@ export default class Register extends React.Component {
 
   render() {
     return (
-      <View style={{ flex: 1, backgroundColor: '#fff', height: 400, width: 250, borderRadius: 20 }}>
-        <Text style={{textAlign: 'center', fontSize:  25, color: '#000', marginTop: 50}}>SIGN UP</Text>
-        <TextField
-          label='EMAIL'
-          value={ this.state.email }
-          onChangeText={ (email) => this.setState({ email }) }
-          style={{marginTop: 30}}
-        />
-        <TextField
-          label='PASSWORD'
-          value={ this.state.password }
-          onChangeText={ (password) => this.setState({ password }) }
-          style={{marginTop: 30}}
-        />
-        <Button
-          onPress={ () => signUpUser(email,password) }
-          color="#d2b3e8"
-          title="SIGN UP"
-          style={{width: 50, marginTop: 30}}
-        />
-        <Button
-          onPress={ () => loginUser(email,password) }
-          color="#d2b3e8"
-          title="LOGIN"
-          style={{width: 50, marginTop: 10}}
-        />
+      <View style={{ flex: 1, backgroundColor: '#fff'}}>
+        <Container>
+          <Form>
+            <Item floatinglabel>
+              <Label>EMAIL</Label>
+              <Input
+                value={ this.state.email }
+                onChangeText={ (email) => this.setState({ email }) }
+              />
+            </Item>
+            <Item floatinglabel>
+              <Label>PASSWORD</Label>
+              <Input
+                value={ this.state.password }
+                onChangeText={ (password) => this.setState({ password }) }
+              />
+            </Item>
+            <Button
+              rounded
+              onPress={ () => signUpUser(email,password) }
+              color="#d2b3e8"
+              title="Sign Up"
+              style={{width: 30, marginTop: 10}}
+            />
+            <Button
+              rounded
+              onPress={ () => loginUser(email,password) }
+              color="#d2b3e8"
+              title="Login"
+              style={{width: 30, marginTop: 10}}
+            />
+          </Form>
+        </Container>
       </View>
     )
   }

@@ -37,14 +37,14 @@ export default class App extends React.Component {
       icon: 'md-book',
       barColor: '#fff',
       pressColor: 'rgba(0, 0, 0, 0.07)',
-      content: <Profile />
+      content: <Feed />
     },
     {
       key: 'search',
       icon: 'md-search',
       barColor: '#fff',
       pressColor: 'rgba(0, 0, 0, 0.07)',
-      content: <Posts />
+      content: <Profile />
     },
     {
       key: 'profile',

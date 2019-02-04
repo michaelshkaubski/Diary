@@ -1,6 +1,5 @@
 import React from 'react';
 import { StyleSheet, View, Text, Button, Image } from 'react-native';
-import Register from './SignUp';
 import { ImagePicker } from 'expo';
 
 export default class Profile extends React.Component {
@@ -12,12 +11,9 @@ export default class Profile extends React.Component {
     }
   }
 
-
-
   render() {
     return (
       <View>
-        <Text>{ this.props.email }</Text>
         { this.state.image && <Image source={{ uri: image }} style={{ width: 200, height: 200 }} /> }
         <Button
           title="CHOOSE AVATAR"
