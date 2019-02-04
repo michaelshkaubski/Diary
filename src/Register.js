@@ -1,8 +1,10 @@
 import React, { Component } from 'react';
-import { Image, StyleSheet, Text, View, Alert } from 'react-native';
 import { AuthSession } from 'expo';
-import { Container, Form, Item, Input, Label, Button } from 'native-base';
 import * as firebase from 'firebase';
+import { Image, StyleSheet, Text, View, Alert } from 'react-native';
+import { Container, Form, Item, Input, Label, Button } from 'native-base';
+import { Ionicons, MaterialIcons, Feather } from '@expo/vector-icons';
+
 
 export default class Register extends React.Component {
   constructor(props) {
@@ -53,7 +55,7 @@ export default class Register extends React.Component {
 
   render() {
     return (
-      <View style={{ flex: 1, backgroundColor: '#fff'}}>
+      <View style={{ flex: 1, backgroundColor: '#fff', marginTop: 50}}>
         <Container>
           <Form>
             <Item floatingLabel>
@@ -71,21 +73,23 @@ export default class Register extends React.Component {
               />
             </Item>
             <Button
-              full
+              iconLeft
+              dark
               rounded
               onPress={ () => this.signUpUser(email, password) }
-              color="#d2b3e8"
-              style={{marginTop: 10, width: 100, color: '#fff'}}
+              style={{marginTop: 10}}
             >
+              <Feather name="user-plus"/>
               <Text>Sign Up</Text>
             </Button>
             <Button
-              full
+              iconLeft
+              dark
               rounded
               onPress={ () => this.loginUser(email, password) }
-              color="#d2b3e8"
-              style={{marginTop: 10, width: 100}}
+              style={{marginTop: 10}}
             >
+              <Feather name="user-check"/>
               <Text>Login</Text>
             </Button>
           </Form>
