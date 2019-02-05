@@ -1,8 +1,9 @@
 import React, { Component } from 'react';
 import { AuthSession } from 'expo';
 import * as firebase from 'firebase';
-import { Image, StyleSheet, Text, View, Alert } from 'react-native';
-import { Container, Form, Item, Input, Label, Button } from 'native-base';
+import { Text, Button } from 'native-base'
+import { Image, StyleSheet, View, Alert, TouchableOpacity } from 'react-native';
+import { TextField } from 'react-native-material-textfield';
 import { Ionicons, MaterialIcons, Feather } from '@expo/vector-icons';
 
 
@@ -13,6 +14,7 @@ export default class Register extends React.Component {
     this.state = {
       email: '',
       password: '',
+      emailError: ''
     }
 
     var config = {
@@ -26,28 +28,36 @@ export default class Register extends React.Component {
 
   }
 
-  signUpUser = (email, password) => {
+  signUpUser() {
     try {
       if (this.state.password < 6) {
-        Alert.alert("Enter at least 6 characters")
+        this.setState({passwordError: "Enter at least 6 characters"})
       }
-      firebase.auth().createUserWithEmailAndPassword(email, password)
+      if (this.state.password = '') {
+        this.setState({passwordError: "This field is required"})
+      }
+      if (this.state.email = '') {
+        this.setState({emailError: "This field is required"})
+      }
 
+      firebase.auth().createUserWithEmailAndPassword(this.state.email, this.state.password)
+
+      if (user) {
+        Alert.alert("Congrats! You signed up")
+      }
     } catch {
-      console.log(error)
       Alert.alert("Something went wrong")
 
     }
   }
 
-  loginUser = (email, password) => {
+  loginUser() {
     try {
-      firebase.auth().singInWithEmailAndPassword(email, password).then(function(user){
+      firebase.auth().singInWithEmailAndPassword(this.state.email, this.state.password).then(function(user){
         console.log(user)
       })
-
+      Alert.alert("Login was successful")
     } catch {
-      console.log(error)
       Alert.alert("Something went wrong")
 
     }
@@ -55,46 +65,45 @@ export default class Register extends React.Component {
 
   render() {
     return (
-      <View style={{ flex: 1, backgroundColor: '#fff', marginTop: 50}}>
-        <Container>
-          <Form>
-            <Item floatingLabel>
-              <Label>Email</Label>
-              <Input
-                value={ this.state.email }
-                onChangeText={ (email) => this.setState({ email }) }
-              />
-            </Item>
-            <Item floatingLabel last>
-              <Label>Password</Label>
-              <Input
-                value={ this.state.password }
-                onChangeText={ (password) => this.setState({ password }) }
-              />
-            </Item>
-            <Button
-              iconLeft
-              dark
-              rounded
-              onPress={ () => this.signUpUser(email, password) }
-              style={{marginTop: 10}}
-            >
-              <Feather name="user-plus"/>
-              <Text>Sign Up</Text>
-            </Button>
-            <Button
-              iconLeft
-              dark
-              rounded
-              onPress={ () => this.loginUser(email, password) }
-              style={{marginTop: 10}}
-            >
-              <Feather name="user-check"/>
-              <Text>Login</Text>
-            </Button>
-          </Form>
-        </Container>
+      <View style={{backgroundColor: '#fff', height: 600}}>
+        <View style={styles.formView}>
+          <TextField
+            label='Email'
+            value={ this.state.email }
+            onChangeText={ (email) => this.setState({ email }) }
+            style={{fontSize: 16}}
+            tintColor='#000'
+            error={this.state.emailError}
+          />
+          <TextField
+            label='Password'
+            value={ this.state.password }
+            onChangeText={ (password) => this.setState({ password }) }
+            style={{fontSize: 16}}
+            tintColor='#000'
+          />
+          <Button rounded dark onPress={() => this.signUpUser()} style={{marginLeft: 100, marginTop: 10}}>
+            <Text>Sign Up</Text>
+          </Button>
+          <Button rounded dark onPress={() => this.loginUser()} style={{marginLeft: 100, marginTop: 10}}>
+            <Text>Login</Text>
+          </Button>
+        </View>
       </View>
     )
   }
 }
+
+const styles = StyleSheet.create({
+  formView: {
+    shadowOffset: { width: 10, height: 10 },
+    shadowRadius: 10,
+    shadowColor: '#000',
+    marginLeft: 20,
+    marginTop: 20,
+    padding: 10,
+    width: 300,
+    height: 300,
+    borderRadius: 40
+  }
+})

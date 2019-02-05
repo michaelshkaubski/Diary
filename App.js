@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { View, Text, StatusBar } from 'react-native';
+import { View, Text } from 'react-native';
 import Register from './src/Register';
 import Posts  from './src/Posts';
 import Search  from './src/Search';
