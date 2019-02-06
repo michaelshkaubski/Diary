@@ -1,10 +1,11 @@
 import React, { Component } from 'react';
-import { AuthSession } from 'expo';
+import { AuthSession, Font } from 'expo';
 import * as firebase from 'firebase';
 import { Text, Button } from 'native-base'
 import { Image, StyleSheet, View, Alert, TouchableOpacity } from 'react-native';
 import { TextField } from 'react-native-material-textfield';
 import { Ionicons, MaterialIcons, Feather } from '@expo/vector-icons';
+import Loader from "react-native-modal-loader";
 
 
 export default class Register extends React.Component {
@@ -14,7 +15,9 @@ export default class Register extends React.Component {
     this.state = {
       email: '',
       password: '',
-      emailError: ''
+      fontLoaded: false,
+      isLoading: true,
+      user: null,
     }
 
     var config = {
@@ -28,23 +31,22 @@ export default class Register extends React.Component {
 
   }
 
+  async componentDidMount() {
+    await Font.loadAsync({
+      'titleFont': require('../assets/Fonts/Abril_Fatface/AbrilFatface-Regular.ttf'),
+      'defaultFont': require('../assets/Fonts/Archivo_Narrow/ArchivoNarrow-Bold.ttf'),
+    })
+
+    this.setState({ fontLoaded: true})
+  }
+
   signUpUser() {
     try {
       if (this.state.password < 6) {
-        this.setState({passwordError: "Enter at least 6 characters"})
+        Alert.alert("Enter at least 6 charcters")
       }
-      if (this.state.password = '') {
-        this.setState({passwordError: "This field is required"})
-      }
-      if (this.state.email = '') {
-        this.setState({emailError: "This field is required"})
-      }
-
       firebase.auth().createUserWithEmailAndPassword(this.state.email, this.state.password)
 
-      if (user) {
-        Alert.alert("Congrats! You signed up")
-      }
     } catch {
       Alert.alert("Something went wrong")
 
@@ -53,57 +55,59 @@ export default class Register extends React.Component {
 
   loginUser() {
     try {
-      firebase.auth().singInWithEmailAndPassword(this.state.email, this.state.password).then(function(user){
+      firebase.auth().signInWithEmailAndPassword(this.state.email, this.state.password).then(function(user){
         console.log(user)
       })
-      Alert.alert("Login was successful")
+
     } catch {
       Alert.alert("Something went wrong")
-
     }
   }
 
   render() {
-    return (
-      <View style={{backgroundColor: '#fff', height: 600}}>
-        <View style={styles.formView}>
-          <TextField
-            label='Email'
-            value={ this.state.email }
-            onChangeText={ (email) => this.setState({ email }) }
-            style={{fontSize: 16}}
-            tintColor='#000'
-            error={this.state.emailError}
-          />
-          <TextField
-            label='Password'
-            value={ this.state.password }
-            onChangeText={ (password) => this.setState({ password }) }
-            style={{fontSize: 16}}
-            tintColor='#000'
-          />
-          <Button rounded dark onPress={() => this.signUpUser()} style={{marginLeft: 100, marginTop: 10}}>
-            <Text>Sign Up</Text>
-          </Button>
-          <Button rounded dark onPress={() => this.loginUser()} style={{marginLeft: 100, marginTop: 10}}>
-            <Text>Login</Text>
-          </Button>
+    if (this.state.fontLoaded) {
+      return (
+        <View style={{backgroundColor: '#fff', height: 600}}>
+          <Text style={{color: '#000', marginTop: 40, marginLeft: 120, fontSize: 25, fontFamily: "titleFont"}}>HILIGHTS</Text>
+          <View style={styles.formView}>
+            <TextField
+              label='Email'
+              value={ this.state.email }
+              onChangeText={ (email) => this.setState({ email }) }
+              style={{fontSize: 16, fontFamily: 'defaultFont'}}
+              tintColor='#000'
+            />
+            <TextField
+              label='Password'
+              value={ this.state.password }
+              onChangeText={ (password) => this.setState({ password }) }
+              style={{fontSize: 16, fontFamily: 'defaultFont'}}
+              tintColor='#000'
+              secureTextEntry={ true }
+            />
+            <Button rounded dark onPress={() => this.signUpUser()} style={{marginLeft: 100, marginTop: 20}}>
+              <Text style={{fontFamily: "defaultFont"}}>Sign Up</Text>
+            </Button>
+            <Button rounded dark onPress={() => this.loginUser()} style={{marginLeft: 106.5, marginTop: 10}}>
+              <Text style={{fontFamily: "defaultFont"}}>Login</Text>
+            </Button>
+          </View>
         </View>
-      </View>
-    )
+      )
+    } else {
+      return (
+        <Loader loading={this.state.isLoading} color="#171717" />
+      )
+    }
   }
 }
 
 const styles = StyleSheet.create({
   formView: {
-    shadowOffset: { width: 10, height: 10 },
-    shadowRadius: 10,
-    shadowColor: '#000',
-    marginLeft: 20,
+    marginLeft: 30,
     marginTop: 20,
     padding: 10,
     width: 300,
     height: 300,
-    borderRadius: 40
   }
 })
