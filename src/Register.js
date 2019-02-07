@@ -17,7 +17,7 @@ export default class Register extends React.Component {
       password: '',
       fontLoaded: false,
       isLoading: true,
-      user: null,
+      loggedIn: false,
     }
 
     var config = {
@@ -43,9 +43,13 @@ export default class Register extends React.Component {
   signUpUser() {
     try {
       if (this.state.password < 6) {
-        Alert.alert("Enter at least 6 charcters")
+        Alert.alert("Enter at least 6 characters")
       }
       firebase.auth().createUserWithEmailAndPassword(this.state.email, this.state.password)
+
+      this.setState({
+        loggedIn: true
+      })
 
     } catch {
       Alert.alert("Something went wrong")
@@ -59,44 +63,58 @@ export default class Register extends React.Component {
         console.log(user)
       })
 
+      this.setState({
+        loggedIn: true
+      })
+
     } catch {
       Alert.alert("Something went wrong")
     }
   }
 
   render() {
-    if (this.state.fontLoaded) {
-      return (
-        <View style={{backgroundColor: '#fff', height: 600}}>
-          <Text style={{color: '#000', marginTop: 40, marginLeft: 120, fontSize: 25, fontFamily: "titleFont"}}>HILIGHTS</Text>
-          <View style={styles.formView}>
-            <TextField
-              label='Email'
-              value={ this.state.email }
-              onChangeText={ (email) => this.setState({ email }) }
-              style={{fontSize: 16, fontFamily: 'defaultFont'}}
-              tintColor='#000'
-            />
-            <TextField
-              label='Password'
-              value={ this.state.password }
-              onChangeText={ (password) => this.setState({ password }) }
-              style={{fontSize: 16, fontFamily: 'defaultFont'}}
-              tintColor='#000'
-              secureTextEntry={ true }
-            />
-            <Button rounded dark onPress={() => this.signUpUser()} style={{marginLeft: 100, marginTop: 20}}>
-              <Text style={{fontFamily: "defaultFont"}}>Sign Up</Text>
-            </Button>
-            <Button rounded dark onPress={() => this.loginUser()} style={{marginLeft: 106.5, marginTop: 10}}>
-              <Text style={{fontFamily: "defaultFont"}}>Login</Text>
-            </Button>
+    if (this.state.loggedIn === false) {
+      if (this.state.fontLoaded) {
+        return (
+          <View style={{backgroundColor: '#fff', height: 600}}>
+            <Text style={{color: '#000', marginTop: 40, marginLeft: 120, fontSize: 25, fontFamily: "titleFont"}}>HILIGHTS</Text>
+            <View style={styles.formView}>
+              <TextField
+                label='Email'
+                value={ this.state.email }
+                onChangeText={ (email) => this.setState({ email }) }
+                style={{fontSize: 16, fontFamily: 'defaultFont'}}
+                tintColor='#000'
+              />
+              <TextField
+                label='Password'
+                value={ this.state.password }
+                onChangeText={ (password) => this.setState({ password }) }
+                style={{fontSize: 16, fontFamily: 'defaultFont'}}
+                tintColor='#000'
+                secureTextEntry={ true }
+              />
+              <Button rounded dark onPress={() => this.signUpUser()} style={{marginLeft: 96, marginTop: 20}}>
+                <Text style={{fontFamily: "defaultFont"}}>Sign Up</Text>
+              </Button>
+              <Button rounded dark onPress={() => this.loginUser()} style={{marginLeft: 102.5, marginTop: 10}}>
+                <Text style={{fontFamily: "defaultFont"}}>Login</Text>
+              </Button>
+            </View>
           </View>
-        </View>
-      )
+        )
+      } else {
+        return (
+          <Loader loading={this.state.isLoading} color="#171717" />
+        )
+      }
     } else {
       return (
-        <Loader loading={this.state.isLoading} color="#171717" />
+        <View style={{backgroundColor: '#171717'}}>
+          <View style={styles.info}>
+            <Text style={{marginTop: 40, color: '#171717'}}>{ this.state.email }</Text>
+          </View>
+        </View>
       )
     }
   }
@@ -109,5 +127,14 @@ const styles = StyleSheet.create({
     padding: 10,
     width: 300,
     height: 300,
+  },
+
+  info: {
+    borderRadius: 40,
+    backgroundColor: '#fff',
+    textAlign: 'center',
+    marginTop: 20,
+    height: 200,
+    width: 200
   }
 })

@@ -4,7 +4,6 @@ import Register from './src/Register';
 import Posts  from './src/Posts';
 import Search  from './src/Search';
 import Feed  from './src/Feed';
-import Profile  from './src/Profile';
 import * as firebase from 'firebase';
 import { Ionicons, MaterialIcons } from '@expo/vector-icons';
 import BottomNavigation, { IconTab } from 'react-native-material-bottom-navigation';
@@ -44,7 +43,7 @@ export default class App extends React.Component {
       icon: 'md-search',
       barColor: '#fff',
       pressColor: 'rgba(0, 0, 0, 0.07)',
-      content: <Profile />
+      content: <Search />
     },
     {
       key: 'profile',
