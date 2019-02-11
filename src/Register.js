@@ -119,7 +119,7 @@ const styles = StyleSheet.create({
   formView: {
     marginLeft: 30,
     marginTop: 20,
-    padding: 10,
+    padding: 20,
     width: 300,
     height: 300,
   },

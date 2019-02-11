@@ -28,7 +28,7 @@ export default class Profile extends React.Component {
     if (this.state.fontLoaded === true) {
       return (
         <View style={{backgroundColor: '#171717', textAlign: 'center'}}>
-          <Text style={{marginTop: 40, fontSize: 25, }}>{this.props.name}</Text>
+          <Text style={{marginTop: 40, fontSize: 25, fontFamily: 'titleFont'}}>{this.props.name}</Text>
         </View>
       )
     } else {
