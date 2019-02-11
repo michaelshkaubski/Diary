@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import { View, Text } from 'react-native';
 import Register from './src/Register';
 import Posts  from './src/Posts';
+import Profile from './src/Profile';
 import Search  from './src/Search';
 import Feed  from './src/Feed';
 import * as firebase from 'firebase';
@@ -15,6 +16,7 @@ export default class App extends React.Component {
     this.state = {
       activeTab: 'feed',
       content: null,
+      profileEmail: '',
     }
 
     var config = {
@@ -50,9 +52,15 @@ export default class App extends React.Component {
       icon: 'person-outline',
       barColor: '#fff',
       pressColor: 'rgba(0, 0, 0, 0.07)',
-      content: <Register />
+      content: <Profile name={this.state.profileEmail}/>
     }
   ]
+
+  loadProfile(value) {
+    this.setState({
+      profileEmail: value
+    })
+  }
 
   componentWillMount() {
     this.setState({
@@ -61,22 +69,28 @@ export default class App extends React.Component {
   }
 
   render() {
-    return (
-      <View style={{ flex: 1, backgroundColor: '#171717'  }}>
-        <View style={{flex: 1}}>
-          { this.state.content }
+    if (this.state.profileEmail != '') {
+      return (
+        <View style={{ flex: 1, backgroundColor: '#171717'  }}>
+          <View style={{flex: 1}}>
+            { this.state.content }
+          </View>
+          <BottomNavigation
+            renderTab={this.renderTab}
+            tabs={this.tabs}
+            onTabPress={(newTab, oldTab) => {
+              this.setState({
+                content: newTab.content,
+              })
+            }}
+          />
         </View>
-        <BottomNavigation
-          renderTab={this.renderTab}
-          tabs={this.tabs}
-          onTabPress={(newTab, oldTab) => {
-            this.setState({
-              content: newTab.content,
-            })
-          }}
-        />
-      </View>
-    )
+      )
+    } else {
+      return (
+        <Register loadProfile={this.loadProfile()}/>
+      )
+    }
   }
 
   renderTab = ({tab, isActive}) => {
