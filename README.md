@@ -1,4 +1,4 @@
-#                  HiLights!
+# Welcome to HiLights!
 # To install: 
   - native-base
   - react-native-material-textfield
