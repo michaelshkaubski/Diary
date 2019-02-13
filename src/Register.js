@@ -17,7 +17,6 @@ export default class Register extends React.Component {
       password: '',
       fontLoaded: false,
       isLoading: true,
-      loggedIn: false,
     }
 
     var config = {
@@ -48,13 +47,9 @@ export default class Register extends React.Component {
       }
       firebase.auth().createUserWithEmailAndPassword(this.state.email, this.state.password)
 
-      this.setState({
-        loggedIn: true
-      })
-
       if (user) {
         this.props.loadProfile(this.state.email)
-        this.props.changeIsLoggedInState(this.state.loggedIn)
+        this.props.changeIsLoggedInState(true)
       }
 
     } catch {
@@ -69,13 +64,9 @@ export default class Register extends React.Component {
         console.log(user)
       })
 
-      this.setState({
-        loggedIn: true
-      })
-
       if (user) {
         this.props.loadProfile(this.state.email)
-        this.props.changeIsLoggedInState(this.state.loggedIn)
+        this.props.changeIsLoggedInState(true)
       }
 
     } catch {
