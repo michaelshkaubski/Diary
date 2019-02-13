@@ -47,16 +47,17 @@ export default class Register extends React.Component {
       }
       firebase.auth().createUserWithEmailAndPassword(this.state.email, this.state.password)
 
-      if (user) {
+      if (typeof user !== 'undefined') {
         this.props.loadProfile(this.state.email)
         this.props.changeIsLoggedInState(true)
       }
 
     } catch {
+      console.log(error)
       Alert.alert("Something went wrong")
 
     }
-  } 
+  }
 
   loginUser() {
     try {
@@ -64,13 +65,15 @@ export default class Register extends React.Component {
         console.log(user)
       })
 
-      if (user) {
+      if (typeof user !== 'undefined') {
         this.props.loadProfile(this.state.email)
         this.props.changeIsLoggedInState(true)
       }
 
     } catch {
+      console.log(error)
       Alert.alert("Something went wrong")
+
     }
   }
 
