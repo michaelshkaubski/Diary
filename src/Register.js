@@ -52,8 +52,10 @@ export default class Register extends React.Component {
         loggedIn: true
       })
 
-      this.props.loadProfile(this.state.email)
-      this.props.changeIsLoggedInState(this.state.loggedIn)
+      if (user) {
+        this.props.loadProfile(this.state.email)
+        this.props.changeIsLoggedInState(this.state.loggedIn)
+      }
 
     } catch {
       Alert.alert("Something went wrong")
@@ -71,8 +73,10 @@ export default class Register extends React.Component {
         loggedIn: true
       })
 
-      this.props.loadProfile(this.state.email)
-      this.props.changeIsLoggedInState(this.state.loggedIn)
+      if (user) {
+        this.props.loadProfile(this.state.email)
+        this.props.changeIsLoggedInState(this.state.loggedIn)
+      }
 
     } catch {
       Alert.alert("Something went wrong")
@@ -83,20 +87,20 @@ export default class Register extends React.Component {
     if (this.state.fontLoaded) {
       return (
         <View style={{backgroundColor: '#fff', height: 600}}>
-          <Text style={{color: '#000', marginTop: 40, marginLeft: 120, fontSize: 25, fontFamily: "titleFont"}}>HiLights</Text>
+          <Text style={{color: '#000', marginTop: 40, marginLeft: 140, fontSize: 25, fontFamily: "titleFont"}}>Hilights</Text>
           <View style={styles.formView}>
             <TextField
               label='Email'
               value={ this.state.email }
               onChangeText={ (email) => this.setState({ email }) }
-              style={{fontSize: 16, fontFamily: 'defaultFont'}}
+              style={{fontSize: 16}}
               tintColor='#000'
             />
             <TextField
               label='Password'
               value={ this.state.password }
               onChangeText={ (password) => this.setState({ password }) }
-              style={{fontSize: 16, fontFamily: 'defaultFont'}}
+              style={{fontSize: 16}}
               tintColor='#000'
               secureTextEntry={ true }
             />

@@ -95,8 +95,8 @@ export default class App extends React.Component {
     } else {
       return (
         <Register
-          loadProfile={this.loadProfile(value)}
-          changeIsLoggedInState={this.changeIsLoggedInState(status)}
+          loadProfile={() => this.loadProfile(value)}
+          changeIsLoggedInState={() => this.changeIsLoggedInState(status)}
         />
       )
     }
