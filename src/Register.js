@@ -56,7 +56,7 @@ export default class Register extends React.Component {
       Alert.alert("Something went wrong")
 
     }
-  }
+  } 
 
   loginUser() {
     try {
