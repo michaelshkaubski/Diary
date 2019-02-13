@@ -53,7 +53,7 @@ export default class Register extends React.Component {
       }
 
     } catch {
-      console.log(error)
+      console.log(error.message)
       Alert.alert("Something went wrong")
 
     }
@@ -71,7 +71,7 @@ export default class Register extends React.Component {
       }
 
     } catch {
-      console.log(error)
+      console.log(error.message)
       Alert.alert("Something went wrong")
 
     }
