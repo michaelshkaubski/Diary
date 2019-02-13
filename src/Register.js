@@ -53,6 +53,7 @@ export default class Register extends React.Component {
       })
 
       this.props.loadProfile(this.state.email)
+      this.props.changeIsLoggedInState(this.state.loggedIn)
 
     } catch {
       Alert.alert("Something went wrong")
@@ -71,6 +72,7 @@ export default class Register extends React.Component {
       })
 
       this.props.loadProfile(this.state.email)
+      this.props.changeIsLoggedInState(this.state.loggedIn)
 
     } catch {
       Alert.alert("Something went wrong")

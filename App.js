@@ -17,6 +17,7 @@ export default class App extends React.Component {
       activeTab: 'feed',
       content: null,
       profileEmail: '',
+      isLoggedIn: false
     }
 
     var config = {
@@ -30,35 +31,40 @@ export default class App extends React.Component {
 
     firebase.initializeApp(config);
 
+    this.tabs = [
+      {
+        key: 'feed',
+        icon: 'md-book',
+        barColor: '#fff',
+        pressColor: 'rgba(0, 0, 0, 0.07)',
+        content: <Feed />
+      },
+      {
+        key: 'search',
+        icon: 'md-search',
+        barColor: '#fff',
+        pressColor: 'rgba(0, 0, 0, 0.07)',
+        content: <Search />
+      },
+      {
+        key: 'profile',
+        icon: 'person-outline',
+        barColor: '#fff',
+        pressColor: 'rgba(0, 0, 0, 0.07)',
+        content: <Profile name={this.state.profileEmail}/>
+      }
+    ]
   }
-
-  tabs = [
-    {
-      key: 'feed',
-      icon: 'md-book',
-      barColor: '#fff',
-      pressColor: 'rgba(0, 0, 0, 0.07)',
-      content: <Feed />
-    },
-    {
-      key: 'search',
-      icon: 'md-search',
-      barColor: '#fff',
-      pressColor: 'rgba(0, 0, 0, 0.07)',
-      content: <Search />
-    },
-    {
-      key: 'profile',
-      icon: 'person-outline',
-      barColor: '#fff',
-      pressColor: 'rgba(0, 0, 0, 0.07)',
-      content: <Profile name={this.state.profileEmail}/>
-    }
-  ]
 
   loadProfile(value) {
     this.setState({
       profileEmail: value
+    })
+  }
+
+  changeIsLoggedInState(status) {
+    this.setState({
+      isLoggedIn: status
     })
   }
 
@@ -69,7 +75,7 @@ export default class App extends React.Component {
   }
 
   render() {
-    if (this.state.profileEmail != '') {
+    if (this.state.isLoggedIn === true) {
       return (
         <View style={{ flex: 1, backgroundColor: '#171717'  }}>
           <View style={{flex: 1}}>
@@ -88,7 +94,10 @@ export default class App extends React.Component {
       )
     } else {
       return (
-        <Register loadProfile={this.loadProfile()}/>
+        <Register
+          loadProfile={this.loadProfile(value)}
+          changeIsLoggedInState={this.changeIsLoggedInState(status)}
+        />
       )
     }
   }
