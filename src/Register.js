@@ -45,12 +45,14 @@ export default class Register extends React.Component {
       if (this.state.password < 6) {
         Alert.alert("Enter at least 6 characters")
       }
-      firebase.auth().createUserWithEmailAndPassword(this.state.email, this.state.password)
+      firebase.auth().createUserWithEmailAndPassword(this.state.email, this.state.password).then(function(user){
+        console.log(user)
 
-      if (typeof user !== 'undefined') {
-        this.props.loadProfile(this.state.email)
-        this.props.changeIsLoggedInState(true)
-      }
+        if (typeof user !== 'undefined') {
+          this.props.loadProfile(this.state.email)
+          this.props.changeIsLoggedInState(true)
+        }
+      }) 
 
     } catch {
       console.log(error.message)
@@ -63,12 +65,12 @@ export default class Register extends React.Component {
     try {
       firebase.auth().signInWithEmailAndPassword(this.state.email, this.state.password).then(function(user){
         console.log(user)
-      })
 
-      if (typeof user !== 'undefined') {
-        this.props.loadProfile(this.state.email)
-        this.props.changeIsLoggedInState(true)
-      }
+        if (typeof user !== 'undefined') {
+          this.props.loadProfile(this.state.email)
+          this.props.changeIsLoggedInState(true)
+        }
+      })
 
     } catch {
       console.log(error.message)
