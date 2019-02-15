@@ -56,13 +56,13 @@ export default class App extends React.Component {
     ]
   }
 
-  loadProfile = (value) => {
+  loadProfile(value) {
     this.setState({
       profileEmail: value
     })
   }
 
-  changeIsLoggedInState = (status) => {
+  changeIsLoggedInState(status) {
     this.setState({
       isLoggedIn: status
     })
@@ -95,8 +95,8 @@ export default class App extends React.Component {
     } else {
       return (
         <Register
-          loadProfile={this.loadProfile}
-          changeIsLoggedInState={this.changeIsLoggedInState}
+          loadProfile={(value) => this.loadProfile(value)}
+          changeIsLoggedInState={(status) => this.changeIsLoggedInState(status)}
         />
       )
     }
