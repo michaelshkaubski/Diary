@@ -4,6 +4,7 @@ import Register from './src/Register';
 import Posts  from './src/Posts';
 import Profile from './src/Profile';
 import Search  from './src/Search';
+import Stats  from './src/Stats';
 import Feed  from './src/Feed';
 import * as firebase from 'firebase';
 import { Ionicons, MaterialIcons } from '@expo/vector-icons';
@@ -44,14 +45,21 @@ export default class App extends React.Component {
         icon: 'md-search',
         barColor: '#fff',
         pressColor: 'rgba(0, 0, 0, 0.07)',
-        content: <Search />
+        content: <Posts />
+      },
+      {
+        key: 'notifications',
+        icon: 'ios-stats',
+        barColor: '#fff',
+        pressColor: 'rgba(0, 0, 0, 0.07)',
+        content: <Stats />
       },
       {
         key: 'profile',
         icon: 'person-outline',
         barColor: '#fff',
         pressColor: 'rgba(0, 0, 0, 0.07)',
-        content: <Profile name={this.state.profileEmail}/>
+        content: <Profile email={this.state.profileEmail}/>
       }
     ]
   }
@@ -77,7 +85,7 @@ export default class App extends React.Component {
   render() {
     if (this.state.isLoggedIn === true) {
       return (
-        <View style={{ flex: 1, backgroundColor: '#171717'  }}>
+        <View style={{ flex: 1, backgroundColor: '#000'  }}>
           <View style={{flex: 1}}>
             { this.state.content }
           </View>
@@ -104,7 +112,7 @@ export default class App extends React.Component {
 
   renderTab = ({tab, isActive}) => {
     let color = '#969696';
-    let activeColor = "#171717"
+    let activeColor = "#000"
     let tabName = tab.key
 
     if (isActive) {

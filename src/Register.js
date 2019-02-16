@@ -83,7 +83,7 @@ export default class Register extends React.Component {
     if (this.state.fontLoaded) {
       return (
         <View style={{backgroundColor: '#fff', height: 600}}>
-          <Text style={{color: '#000', marginTop: 40, marginLeft: 140, fontSize: 25, fontFamily: "titleFont"}}>Hilights</Text>
+          <Text style={{color: '#000', marginTop: 40, marginLeft: 140, fontSize: 25, fontFamily: "titleFont"}}>HILIGHTS</Text>
           <View style={styles.formView}>
             <TextField
               label='Email'
@@ -111,7 +111,7 @@ export default class Register extends React.Component {
       )
     } else {
       return (
-        <Loader loading={this.state.isLoading} color="#171717" />
+        <Loader loading={this.state.isLoading} color="#000" />
       )
     }
   }
